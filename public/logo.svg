@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="60" viewBox="0 0 200 60">
+  <!-- Background Circle for Squid Icon -->
+  <circle cx="33" cy="30" r="28" fill="#EAEAEA" stroke="#FF6347" stroke-width="2"/>
+  
+  <!-- Squid Emoji -->
+  <text x="17" y="42" font-size="32px">🦑</text>
+  
+  <!-- Text "MockMate" -->
+  <text x="70" y="37" font-family="Arial, sans-serif" font-size="28px" fill="#333">
+    Mock
+    <tspan fill="#FF6347">Mate</tspan>
+  </text>
+</svg>
