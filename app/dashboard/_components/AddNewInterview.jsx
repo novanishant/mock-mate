@@ -17,6 +17,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
 import { MockInterview } from "@/utils/schema.js";
+import { useRouter } from "next/navigation";
+
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState("");
@@ -24,8 +26,8 @@ function AddNewInterview() {
   const [jobExperience, setJobExperience] = useState("");
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setJsonResponse] = useState([]);
-  const { user } = useUser();
-
+  const { user } = useUser();  
+  const router = useRouter();
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -53,6 +55,7 @@ function AddNewInterview() {
         .returning({ mockId: MockInterview.mockId });
         if (resp){
           setOpenDailog (false);
+          router.push('/dashboard/interview'+resp[0]?.mockId);
         }
 
     } else {
