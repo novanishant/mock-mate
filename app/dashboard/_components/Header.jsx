@@ -9,7 +9,7 @@ function Header() {
   return (
     <div className="flex p-2 justify-between bg-secondary shadow-sm">
       <Image src={"/logo.svg"} width={200} height={120} alt={"MockMate"} />
-      <ul className={"hidden md:flex gap-10 pt-4"}>
+      {/* <ul className={"hidden md:flex gap-10 pt-4"}>
         <li
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
             path == "/dashboard" && " text-primary font-bold"
@@ -24,13 +24,7 @@ function Header() {
         >
           Questions
         </li>
-        <li
-          className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
-            path == "/dashboard/upgrade" && " text-primary font-bold"
-          }`}
-        >
-          Upgrade
-        </li>
+        
         <li
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
             path == "/dashboard/how " && " text-primary font-bold"
@@ -38,7 +32,7 @@ function Header() {
         >
           How it Works?
         </li>
-      </ul>
+      </ul> */}
       <UserButton />
     </div>
   );
