@@ -39,7 +39,7 @@ function Header() {
       </ul> */}
       <div className="flex items-center gap-4">
         <UserButton />
-        <h1 className="text-gray-800 text-lg font-bold">
+        <h1 className="text-gray-800 text-lg font-bold hidden md:block">
           {user?.firstName} {user?.lastName}
         </h1>
       </div>
