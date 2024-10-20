@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 function Feedback({ params }) {
   const [feedbackList, setFeedbackList] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
   useEffect(() => {
     GetFeedback();
   }, []);
@@ -26,11 +27,23 @@ function Feedback({ params }) {
         .orderBy(UserAnswer.id);
       setFeedbackList(result);
       console.log(result);
+      if (result.length > 0) {
+        let totalRating = 0;
+        for (let i = 0; i < result.length; i++) {
+          totalRating += parseInt(result[i].rating);
+        }
+        const avgRating = totalRating / result.length;
+
+        setAverageRating(avgRating.toFixed(1)); 
+      } else {
+        setAverageRating(0); 
+      }
     } catch (error) {
       console.error("Error fetching feedback:", error);
     }
   };
   const router = useRouter();
+
   return (
     <div className="p-10 ">
       {feedbackList?.length == 0 ? (
@@ -53,7 +66,7 @@ function Feedback({ params }) {
             Here is your interview feedback
           </h2>
           <h2 className="text-blue-600 text-lg my-3">
-            Your overall interview rating: <strong>7/10</strong>
+            Your overall interview rating: <strong>{averageRating*2}/10</strong>
           </h2>
           <h2 className="text-sm text-gray-500">
             Find below interview question with correct answer, Your answer and

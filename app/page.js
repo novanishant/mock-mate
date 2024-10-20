@@ -1,9 +1,9 @@
 
-
+import {AuroraBackgroundDemo} from "./AuroraBackgroundDemo"
 export default function Home() {
   return (
     <div>
-      hi there
+      <AuroraBackgroundDemo/>
     </div>
   );
 }

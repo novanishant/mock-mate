@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import Webcam from "react-webcam";
 import { WebcamIcon, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from 'next/link'
+import Link from 'next/link';
 function Interview({ params }) {
   const [interviewData, setInterviewData] = useState("");
   const [webCamEnabled, setWebCamEnabled] = useState(false);
