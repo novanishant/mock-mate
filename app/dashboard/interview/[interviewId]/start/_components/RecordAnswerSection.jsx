@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 import { db } from "@/utils/db.js";
 import moment from "moment";
-
+import { UserAnswer } from "@/utils/schema.js";
 const RecordAnswerSection = ({
   mockInterviewQuestion,
   activeQuestionIndex,
@@ -26,6 +26,7 @@ const RecordAnswerSection = ({
     results,
     startSpeechToText,
     stopSpeechToText,
+    setResults
   } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
@@ -41,7 +42,7 @@ const RecordAnswerSection = ({
     if (!isRecording && userAnswer.length > 10) {
       UpdateUserAnswer();
     }
-  }, [userAnswer]);
+  }, [isRecording,userAnswer]);
 
   const StartStopRecording = async () => {
     if (isRecording) {
@@ -51,6 +52,8 @@ const RecordAnswerSection = ({
     }
   };
   const UpdateUserAnswer = async () => {
+    try{
+
     setLoading(true);
     const feedbackPrompt =
       "Question:" +
@@ -65,7 +68,6 @@ const RecordAnswerSection = ({
       .text()
       .replace("```json", "")
       .replace("```", "");
-    console.log(mockJsonResp);
     const JsonFeedbackResp = JSON.parse(mockJsonResp);
     const resp = await db.insert(UserAnswer).values({
       mockIdRef: interviewData?.mockId,
@@ -78,10 +80,17 @@ const RecordAnswerSection = ({
       createdAt: moment().format("DD-MM-YYYY"),
     });
     if (resp) {
-      toast("User Answer recorded successfully");
+      toast.success("User Answer recorded successfully");
+      setUserAnswer(""); 
     }
-    setUserAnswer("");
-    setLoading(false);
+    
+    }catch (err) {
+        console.error("Error updating user answer:", err);
+        toast.error("There was an error recording the answer.");
+      } finally {
+        setResults([])
+        setLoading(false);
+      }
   };
   return (
     <div className="flex items-center justify-center flex-col">
@@ -91,6 +100,7 @@ const RecordAnswerSection = ({
           width={200}
           height={200}
           className="absolute"
+          alt="webcam"
         />
         <Webcam
           mirrored={true}
