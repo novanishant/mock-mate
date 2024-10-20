@@ -55,7 +55,7 @@ function AddNewInterview() {
         .returning({ mockId: MockInterview.mockId });
         if (resp){
           setOpenDialog (false);
-          router.push('/dashboard/interview'+resp[0]?.mockId);
+          router.push('/dashboard/interview/'+resp[0]?.mockId);
         }
 
     } else {
